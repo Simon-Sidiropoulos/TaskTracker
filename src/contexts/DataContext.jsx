@@ -5,48 +5,46 @@ const DataContext = createContext(null);
 
 export const DataProvider = ({ children }) => {
   const { user } = useAuth();
-  const [tasks, setTasks] = useState(() => {
-    if (user) {
-      const stored = localStorage.getItem(`data_${user.id}`);
-      if (stored) {
-        const data = JSON.parse(stored);
-        return data.tasks || [];
-      }
-    }
-    return [];
-  });
-  const [habits, setHabits] = useState(() => {
-    if (user) {
-      const stored = localStorage.getItem(`data_${user.id}`);
-      if (stored) {
-        const data = JSON.parse(stored);
-        return data.habits || [];
-      }
-    }
-    return [];
-  });
-  const [goals, setGoals] = useState(() => {
-    if (user) {
-      const stored = localStorage.getItem(`data_${user.id}`);
-      if (stored) {
-        const data = JSON.parse(stored);
-        return data.goals || [];
-      }
-    }
-    return [];
-  });
-  const [timeEntries, setTimeEntries] = useState(() => {
-    if (user) {
-      const stored = localStorage.getItem(`data_${user.id}`);
-      if (stored) {
-        const data = JSON.parse(stored);
-        return data.timeEntries || [];
-      }
-    }
-    return [];
-  });
+  const [tasks, setTasks] = useState([]);
+  const [habits, setHabits] = useState([]);
+  const [goals, setGoals] = useState([]);
+  const [timeEntries, setTimeEntries] = useState([]);
 
-  // Save data to localStorage
+  // Load data when user changes (login/logout/switch account)
+  useEffect(() => {
+    if (user) {
+      const stored = localStorage.getItem(`data_${user.id}`);
+      if (stored) {
+        try {
+          const data = JSON.parse(stored);
+          setTasks(data.tasks || []);
+          setHabits(data.habits || []);
+          setGoals(data.goals || []);
+          setTimeEntries(data.timeEntries || []);
+        } catch (error) {
+          console.error('Error loading data:', error);
+          setTasks([]);
+          setHabits([]);
+          setGoals([]);
+          setTimeEntries([]);
+        }
+      } else {
+        // No data for this user yet
+        setTasks([]);
+        setHabits([]);
+        setGoals([]);
+        setTimeEntries([]);
+      }
+    } else {
+      // User logged out, clear data
+      setTasks([]);
+      setHabits([]);
+      setGoals([]);
+      setTimeEntries([]);
+    }
+  }, [user]);
+
+  // Save data to localStorage whenever it changes
   useEffect(() => {
     if (user) {
       localStorage.setItem(`data_${user.id}`, JSON.stringify({
