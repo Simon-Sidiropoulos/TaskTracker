@@ -5,24 +5,46 @@ const DataContext = createContext(null);
 
 export const DataProvider = ({ children }) => {
   const { user } = useAuth();
-  const [tasks, setTasks] = useState([]);
-  const [habits, setHabits] = useState([]);
-  const [goals, setGoals] = useState([]);
-  const [timeEntries, setTimeEntries] = useState([]);
-
-  // Load data from localStorage
-  useEffect(() => {
+  const [tasks, setTasks] = useState(() => {
     if (user) {
       const stored = localStorage.getItem(`data_${user.id}`);
       if (stored) {
         const data = JSON.parse(stored);
-        setTasks(data.tasks || []);
-        setHabits(data.habits || []);
-        setGoals(data.goals || []);
-        setTimeEntries(data.timeEntries || []);
+        return data.tasks || [];
       }
     }
-  }, [user]);
+    return [];
+  });
+  const [habits, setHabits] = useState(() => {
+    if (user) {
+      const stored = localStorage.getItem(`data_${user.id}`);
+      if (stored) {
+        const data = JSON.parse(stored);
+        return data.habits || [];
+      }
+    }
+    return [];
+  });
+  const [goals, setGoals] = useState(() => {
+    if (user) {
+      const stored = localStorage.getItem(`data_${user.id}`);
+      if (stored) {
+        const data = JSON.parse(stored);
+        return data.goals || [];
+      }
+    }
+    return [];
+  });
+  const [timeEntries, setTimeEntries] = useState(() => {
+    if (user) {
+      const stored = localStorage.getItem(`data_${user.id}`);
+      if (stored) {
+        const data = JSON.parse(stored);
+        return data.timeEntries || [];
+      }
+    }
+    return [];
+  });
 
   // Save data to localStorage
   useEffect(() => {

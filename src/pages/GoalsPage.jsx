@@ -3,7 +3,7 @@ import { useData } from '../contexts/DataContext';
 import { Plus, X, Target, CheckCircle, Circle } from 'lucide-react';
 import { format } from 'date-fns';
 
-function GoalCard({ goal, onUpdate, onDelete, onAddMilestone, onToggleMilestone }) {
+function GoalCard({ goal, onDelete, onAddMilestone, onToggleMilestone }) {
   const [isAddingMilestone, setIsAddingMilestone] = useState(false);
   const [milestoneTitle, setMilestoneTitle] = useState('');
 
@@ -146,7 +146,7 @@ function GoalCard({ goal, onUpdate, onDelete, onAddMilestone, onToggleMilestone 
 }
 
 export default function GoalsPage() {
-  const { goals, addGoal, updateGoal, deleteGoal, addMilestone, toggleMilestone } = useData();
+  const { goals, addGoal, deleteGoal, addMilestone, toggleMilestone } = useData();
   const [isAdding, setIsAdding] = useState(false);
   const [newGoal, setNewGoal] = useState({
     title: '',
@@ -258,7 +258,6 @@ export default function GoalsPage() {
             <GoalCard
               key={goal.id}
               goal={goal}
-              onUpdate={updateGoal}
               onDelete={deleteGoal}
               onAddMilestone={addMilestone}
               onToggleMilestone={toggleMilestone}

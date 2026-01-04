@@ -1,6 +1,6 @@
 import { useData } from '../contexts/DataContext';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { format, startOfWeek, endOfWeek, eachDayOfInterval, subDays } from 'date-fns';
+import { format, startOfWeek, endOfWeek, subDays } from 'date-fns';
 import { TrendingUp, CheckCircle, Target, Clock } from 'lucide-react';
 
 export default function AnalyticsPage() {
