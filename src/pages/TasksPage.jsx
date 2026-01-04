@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useData } from '../contexts/DataContext';
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove } from '@dnd-kit/sortable';
@@ -191,7 +191,7 @@ export default function TasksPage() {
   };
 
   // Update sortedTasks when tasks change
-  useState(() => {
+  useEffect(() => {
     setSortedTasks(tasks);
   }, [tasks]);
 
