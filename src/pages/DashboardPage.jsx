@@ -41,25 +41,25 @@ export default function DashboardPage() {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-4 gap-6 mb-6">
-        <Link to="/tasks" className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+        <Link to="/tasks" className="bg-linear-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
           <CheckSquare size={32} className="mb-3" />
           <div className="text-3xl font-bold mb-1">{tasks.filter(t => t.status !== 'done').length}</div>
           <div className="text-blue-100">Active Tasks</div>
         </Link>
 
-        <Link to="/habits" className="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+        <Link to="/habits" className="bg-linear-to-br from-green-500 to-green-600 rounded-lg p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
           <Flame size={32} className="mb-3" />
           <div className="text-3xl font-bold mb-1">{habits.length}</div>
           <div className="text-green-100">Daily Habits</div>
         </Link>
 
-        <Link to="/goals" className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+        <Link to="/goals" className="bg-linear-to-br from-purple-500 to-purple-600 rounded-lg p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
           <Target size={32} className="mb-3" />
           <div className="text-3xl font-bold mb-1">{goals.length}</div>
           <div className="text-purple-100">Active Goals</div>
         </Link>
 
-        <Link to="/time" className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+        <Link to="/time" className="bg-linear-to-br from-orange-500 to-orange-600 rounded-lg p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
           <Clock size={32} className="mb-3" />
           <div className="text-3xl font-bold mb-1">{todayHours}h {todayMinutes}m</div>
           <div className="text-orange-100">Today's Time</div>

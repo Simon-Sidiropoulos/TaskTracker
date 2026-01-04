@@ -115,7 +115,7 @@ function GoalCard({ goal, onUpdate, onDelete, onAddMilestone, onToggleMilestone 
               >
                 <button
                   onClick={() => onToggleMilestone(goal.id, milestone.id)}
-                  className="flex-shrink-0"
+                  className="shrink-0"
                 >
                   {milestone.completed ? (
                     <CheckCircle className="text-green-600 dark:text-green-400" size={20} />
