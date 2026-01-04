@@ -46,7 +46,7 @@ function Timer({ onStop }) {
   };
 
   return (
-    <div className="bg-linear-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-8 shadow-lg border border-gray-200 dark:border-gray-600">
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-8 shadow-lg border border-gray-200 dark:border-gray-600">
       <div className="text-center mb-6">
         <div className="text-6xl font-bold text-gray-800 dark:text-white mb-4">
           {formatTime(seconds)}
