@@ -4,45 +4,69 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem('currentUser');
     return storedUser ? JSON.parse(storedUser) : null;
   });
   const isLoading = false;
 
   const signup = (email, password, name) => {
-    // Simulate signup
+    // Check if user already exists
+    const usersDb = JSON.parse(localStorage.getItem('usersDb') || '{}');
+    
+    if (usersDb[email]) {
+      alert('User already exists. Please login instead.');
+      return null;
+    }
+
     const newUser = {
-      id: Date.now().toString(),
+      id: email, // Use email as stable ID
       email,
       name,
       createdAt: new Date().toISOString(),
     };
+    
+    // Save to users database
+    usersDb[email] = newUser;
+    localStorage.setItem('usersDb', JSON.stringify(usersDb));
+    
+    // Set as current user
     setUser(newUser);
-    localStorage.setItem('user', JSON.stringify(newUser));
+    localStorage.setItem('currentUser', JSON.stringify(newUser));
     return newUser;
   };
 
   const login = (email, password) => {
-    // Simulate login
-    const existingUser = localStorage.getItem('user');
-    if (existingUser) {
-      const userData = JSON.parse(existingUser);
+    // Get users database
+    const usersDb = JSON.parse(localStorage.getItem('usersDb') || '{}');
+    
+    // Check if user exists
+    if (usersDb[email]) {
+      const userData = usersDb[email];
       setUser(userData);
+      localStorage.setItem('currentUser', JSON.stringify(userData));
       return userData;
     }
+    
     // Create new user if none exists
     return signup(email, password, email.split('@')[0]);
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    localStorage.removeItem('currentUser');
   };
 
   const updateProfile = (updates) => {
     const updatedUser = { ...user, ...updates };
     setUser(updatedUser);
-    localStorage.setItem('user', JSON.stringify(updatedUser));
+    
+    // Update in users database
+    const usersDb = JSON.parse(localStorage.getItem('usersDb') || '{}');
+    usersDb[user.email] = updatedUser;
+    localStorage.setItem('usersDb', JSON.stringify(usersDb));
+    
+    // Update current user
+    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
   };
 
   return (
