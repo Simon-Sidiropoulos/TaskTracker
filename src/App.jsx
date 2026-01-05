@@ -109,7 +109,7 @@ function AppRoutes() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/TaskTracker">
       <ThemeProvider>
         <AuthProvider>
           <DataProvider>
