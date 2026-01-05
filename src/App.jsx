@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { DataProvider } from './contexts/DataContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -109,7 +109,7 @@ function AppRoutes() {
 
 function App() {
   return (
-    <BrowserRouter basename="/TaskTracker">
+    <HashRouter>
       <ThemeProvider>
         <AuthProvider>
           <DataProvider>
@@ -117,7 +117,7 @@ function App() {
           </DataProvider>
         </AuthProvider>
       </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
